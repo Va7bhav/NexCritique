@@ -1,11 +1,8 @@
-import Footer from "@/components/Footer";
-import Navbar from "/components/Navbar"
 import React from "react";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
       <div className="">
         <img src="/yes.jpg" alt="" />
       </div>
@@ -89,7 +86,6 @@ export default function Home() {
           {/* <button className="flex mx-auto mt-16 text-white bg-pink-500 border-0 py-2 px-8 focus:outline-none hover:bg-pink-600 rounded text-lg">Button</button> */}
         </div>
       </section>
-      <Footer />
     </>
   );
 }

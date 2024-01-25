@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-const Mugs = () => {
+const Stickers = () => {
   return (
     <div><section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
@@ -9,7 +9,7 @@ const Mugs = () => {
           <div className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-5">
             <Link href={'product/wear-the-code'}>
               <div className="block relative rounded overflow-hidden">
-                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/415w2-YpX5L._SY300_SX300_QL70_FMwebp_.jpg" />
+                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/91d3mhYCJoL._AC._SR360,460.jpg" />
               </div>
             </Link>
             <div className="mt-4 text-center md:text-left">
@@ -22,7 +22,7 @@ const Mugs = () => {
           <div className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-5">
             <Link href={'product/wear-the-code'}>
               <div className="block relative rounded overflow-hidden">
-                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/415w2-YpX5L._SY300_SX300_QL70_FMwebp_.jpg" />
+                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/91d3mhYCJoL._AC._SR360,460.jpg" />
               </div>
             </Link>
             <div className="mt-4 text-center md:text-left">
@@ -35,7 +35,7 @@ const Mugs = () => {
           <div className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-5">
             <Link href={'product/wear-the-code'}>
               <div className="block relative rounded overflow-hidden">
-                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/415w2-YpX5L._SY300_SX300_QL70_FMwebp_.jpg" />
+                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/91d3mhYCJoL._AC._SR360,460.jpg" />
               </div>
             </Link>
             <div className="mt-4 text-center md:text-left">
@@ -48,7 +48,7 @@ const Mugs = () => {
           <div className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-5">
             <Link href={'product/wear-the-code'}>
               <div className="block relative rounded overflow-hidden">
-                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/415w2-YpX5L._SY300_SX300_QL70_FMwebp_.jpg" />
+                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/91d3mhYCJoL._AC._SR360,460.jpg" />
               </div>
             </Link>
             <div className="mt-4 text-center md:text-left">
@@ -61,7 +61,7 @@ const Mugs = () => {
           <div className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-5">
             <Link href={'product/wear-the-code'}>
               <div className="block relative rounded overflow-hidden">
-                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/415w2-YpX5L._SY300_SX300_QL70_FMwebp_.jpg" />
+                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/91d3mhYCJoL._AC._SR360,460.jpg" />
               </div>
             </Link>
             <div className="mt-4 text-center md:text-left">
@@ -74,7 +74,7 @@ const Mugs = () => {
           <div className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-5">
             <Link href={'product/wear-the-code'}>
               <div className="block relative rounded overflow-hidden">
-                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/415w2-YpX5L._SY300_SX300_QL70_FMwebp_.jpg" />
+                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/91d3mhYCJoL._AC._SR360,460.jpg" />
               </div>
             </Link>
             <div className="mt-4 text-center md:text-left">
@@ -87,7 +87,7 @@ const Mugs = () => {
           <div className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-5">
             <Link href={'product/wear-the-code'}>
               <div className="block relative rounded overflow-hidden">
-                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/415w2-YpX5L._SY300_SX300_QL70_FMwebp_.jpg" />
+                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/91d3mhYCJoL._AC._SR360,460.jpg" />
               </div>
             </Link>
             <div className="mt-4 text-center md:text-left">
@@ -100,7 +100,7 @@ const Mugs = () => {
           <div className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-5">
             <Link href={'product/wear-the-code'}>
               <div className="block relative rounded overflow-hidden">
-                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/415w2-YpX5L._SY300_SX300_QL70_FMwebp_.jpg" />
+                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/91d3mhYCJoL._AC._SR360,460.jpg" />
               </div>
             </Link>
             <div className="mt-4 text-center md:text-left">
@@ -113,7 +113,7 @@ const Mugs = () => {
           <div className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-5">
             <Link href={'product/wear-the-code'}>
               <div className="block relative rounded overflow-hidden">
-                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/415w2-YpX5L._SY300_SX300_QL70_FMwebp_.jpg" />
+                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/91d3mhYCJoL._AC._SR360,460.jpg" />
               </div>
             </Link>
             <div className="mt-4 text-center md:text-left">
@@ -126,7 +126,7 @@ const Mugs = () => {
           <div className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-5">
             <Link href={'product/wear-the-code'}>
               <div className="block relative rounded overflow-hidden">
-                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/415w2-YpX5L._SY300_SX300_QL70_FMwebp_.jpg" />
+                <img alt="ecommerce" className="m-auto md:mx-0 h-[30vh] md:h-[36vh] block" src="https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/91d3mhYCJoL._AC._SR360,460.jpg" />
               </div>
             </Link>
             <div className="mt-4 text-center md:text-left">
@@ -144,4 +144,4 @@ const Mugs = () => {
   )
 }
 
-export default Mugs
+export default Stickers
