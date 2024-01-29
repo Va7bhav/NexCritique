@@ -136,8 +136,6 @@ const Stickers = () => {
               <p className="mt-1">S M L XL XXL</p>
             </div>
           </div>
-
-
         </div>
       </div>
     </section></div>
