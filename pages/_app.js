@@ -1,11 +1,22 @@
+/* eslint-disable react/prop-types */
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
 import React, { useEffect, useState } from "react";
 
+// const cart = {
+//   "wear-this-code": {
+//       qty: 1,
+//       price: 400,
+//       name: "hello",
+//       size: "XL",
+//       variant: "blue"
+//   }
+// }
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({})
   const [subTotal, setSubTotal] = useState(0)
+
   useEffect(() => {
     try {
       if (localStorage.getItem("cart")) {
@@ -17,8 +28,8 @@ export default function App({ Component, pageProps }) {
     }
   }, [])
   
-  const saveCart = () => {
-    localStorage.setItem("cart", cart);
+  const saveCart = (cart) => {
+    localStorage.setItem("cart", JSON.stringify(cart));
 
     let subt = 0;
     let keys = Object.keys(cart)

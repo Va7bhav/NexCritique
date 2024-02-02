@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useRef } from 'react'
@@ -6,7 +7,6 @@ import { FaRegWindowClose, FaPlus, FaMinus } from "react-icons/fa";
 import { IoBagAdd } from "react-icons/io5";
 
 const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
-  console.log(cart, addToCart, removeFromCart, clearCart, subTotal);
   const toggleCart = () => {
     if (ref.current.classList.contains('translate-x-full')) {
       ref.current.classList.remove('translate-x-full');
@@ -40,14 +40,14 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
         <span onClick={toggleCart} className="absolute top-2 right-2 cursor-pointer text-xl text-pink-500"><FaRegWindowClose /></span>
         <ol className='list-decimal font-semibold'>
           {Object.keys(cart).length == 0 && <div className='text-center mt-2 mb-2'>Your Cart is Empty</div>}
-          {console.log(Object.keys(cart))}
           {Object.keys(cart).map((k) => {
+            console.log(k);
             return (
               <li key={k}>
                 <div className="item flex my-5">
                   <div className='w-2/3 font-semibold'>{cart[k].name}</div>
                   <div className='flex font-semibold items-center justify-center w-1/3 text-sm'>
-                    <FaMinus className='cursor-pointer text-pink-500' /> <span className='mx-2 text-xl'> {cart[k].qty} </span> <FaPlus className='cursor-pointer text-pink-500' />
+                    <FaMinus onClick={()=>removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant)} className='cursor-pointer text-pink-500' /> <span className='mx-2 text-xl'> {cart[k].qty} </span> <FaPlus onClick={()=>addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant)} className='cursor-pointer text-pink-500' />
                   </div>
                 </div>
               </li>
@@ -59,7 +59,6 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
           <button onClick={clearCart} className="flex mr-2 text-white bg-pink-500 border-0 py-2 px-2 focus:outline-none hover:bg-pink-600 rounded text-sm">Clear-Cart</button>
         </div>
       </div>
-
     </div>
   )
 }
