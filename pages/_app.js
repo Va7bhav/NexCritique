@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
