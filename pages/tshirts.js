@@ -37,12 +37,10 @@ const Tshirts = ({ tshirts }) => {
                       </div>
                       <div className="flex justify-center md:justify-start my-2">
                         {tshirts[tshirt].color.map((c) => {
-                        console.log(c)
                           return (
-                            <button key={c} className={`bg-${c}-500 border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none mx-1`}/>
+                            <button key={c} className={`bg-${c}-500 border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none mx-1`} />
                           )
                         })}
-                        {console.log(" :  :  : ")}
                       </div>
                     </div>
                   </div>

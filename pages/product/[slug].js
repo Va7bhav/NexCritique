@@ -9,11 +9,13 @@ import Product from '@/models/Product';
 
 
 const Slug = ({ addToCart, product, variants }) => {
+  
   const router = useRouter()
   const { slug } = router.query;
 
   const [pin, setPin] = useState();
   const [service, setService] = useState(true)
+
   const checkService = async () => {
     let pins = await fetch('http://localhost:3000/api/pincode');
     let pinJson = await pins.json();
@@ -31,6 +33,13 @@ const Slug = ({ addToCart, product, variants }) => {
 
   const [color, setColor] = useState(product.color)
   const [size, setSize] = useState(product.size)
+
+  
+  const refreshVariant = (newColor, newSize) => {
+    let url = `http://localhost:3000/product/${variants[newColor][newSize]['slug']}`
+    window.location = url;
+  }
+
   return (
     <><section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-16 mx-auto">
@@ -80,24 +89,24 @@ const Slug = ({ addToCart, product, variants }) => {
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
               <div className="flex">
                 <span className="mr-3">Color</span>
-                {Object.keys(variants).includes('red') && <button className="border-2 border-gray-300 ml-1 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                {Object.keys(variants).includes('green') && <button className="border-2 border-gray-300 ml-1 bg-green-500 rounded-full w-6 h-6 focus:outline-none"></button>}
-                {Object.keys(variants).includes('yellow') && <button className="border-2 border-gray-300 ml-1 bg-yellow-500 rounded-full w-6 h-6 focus:outline-none"></button>}
-                {Object.keys(variants).includes('white') && <button className="border-2 border-gray-300 ml-1 bg-white rounded-full w-6 h-6 focus:outline-none"></button>}
-                {Object.keys(variants).includes('blue') && <button className="border-2 border-gray-300 ml-1 bg-blue-500 rounded-full w-6 h-6 focus:outline-none"></button>}
-                {Object.keys(variants).includes('black') && <button className="border-2 border-gray-300 ml-1 bg-black rounded-full w-6 h-6 focus:outline-none"></button>}
-                {Object.keys(variants).includes('purple') && <button className="border-2 border-gray-300 ml-1 bg-purple-500 rounded-full w-6 h-6 focus:outline-none"></button>}
-                {Object.keys(variants).includes('pink') && <button className="border-2 border-gray-300 ml-1 bg-pink-500 rounded-full w-6 h-6 focus:outline-none"></button>}
+                {Object.keys(variants).includes('red') && Object.keys(variants['red']).includes(size) && <button onClick={() => refreshVariant('red', size)} className={`border-2 ml-1 bg-red-700 rounded-full w-6 h-6 focus:outline-none ${color === 'red' ? 'border-black' : 'border-gray-300'}`}></button>}
+                {Object.keys(variants).includes('green') && Object.keys(variants['green']).includes(size) && <button onClick={() => refreshVariant('green', size)} className={`border-2 ml-1 bg-green-500 rounded-full w-6 h-6 focus:outline-none ${color === 'green' ? 'border-black' : 'border-gray-300'}`}></button>}
+                {Object.keys(variants).includes('yellow') && Object.keys(variants['yellow']).includes(size) && <button onClick={() => refreshVariant('yellow', size)} className={`border-2 ml-1 bg-yellow-500 rounded-full w-6 h-6 focus:outline-none ${color === 'yellow' ? 'border-black' : 'border-gray-300'}`}></button>}
+                {Object.keys(variants).includes('white') && Object.keys(variants['white']).includes(size) && <button onClick={() => refreshVariant('white', size)} className={`border-2 ml-1 bg-white rounded-full w-6 h-6 focus:outline-none ${color === 'white' ? 'border-black' : 'border-gray-300'}`}></button>}
+                {Object.keys(variants).includes('blue') && Object.keys(variants['blue']).includes(size) && <button onClick={() => refreshVariant('blue', size)} className={`border-2 ml-1 bg-blue-500 rounded-full w-6 h-6 focus:outline-none ${color === 'blue' ? 'border-black' : 'border-gray-300'}`}></button>}
+                {Object.keys(variants).includes('black') && Object.keys(variants['black']).includes(size) && <button onClick={() => refreshVariant('black', size)} className={`border-2 ml-1 bg-black rounded-full w-6 h-6 focus:outline-none ${color === 'black' ? 'border-black' : 'border-gray-300'}`}></button>}
+                {Object.keys(variants).includes('purple') && Object.keys(variants['purple']).includes(size) && <button onClick={() => refreshVariant('purple', size)} className={`border-2 ml-1 bg-purple-500 rounded-full w-6 h-6 focus:outline-none ${color === 'purple' ? 'border-black' : 'border-gray-300'}`}></button>}
+                {Object.keys(variants).includes('pink') && Object.keys(variants['pink']).includes(size) && <button onClick={() => refreshVariant('pink', size)} className={`border-2 ml-1 bg-pink-500 rounded-full w-6 h-6 focus:outline-none ${color === 'pink' ? 'border-black' : 'border-gray-300'}`}></button>}
               </div>
               <div className="flex ml-6 items-center">
                 <span className="mr-3">Size</span>
                 <div className="relative">
-                  <select className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-pink-500 text-base pl-3 pr-10">
-                    <option>S</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
-                    <option>XXL</option>
+                  <select value={size} onChange={(e) => refreshVariant(color, e.target.value)} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-pink-500 text-base pl-3 pr-10">
+                    {Object.keys(variants[color]).includes('S') && <option value={'S'}>S</option>}
+                    {Object.keys(variants[color]).includes('M') && <option value={'M'}>M</option>}
+                    {Object.keys(variants[color]).includes('L') && <option value={'L'}>L</option>}
+                    {Object.keys(variants[color]).includes('XL') && <option value={'XL'}>XL</option>}
+                    {Object.keys(variants[color]).includes('XXL') && <option value={'XXL'}>XXL</option>}
                   </select>
                   <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                     <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4" viewBox="0 0 24 24">
@@ -138,7 +147,8 @@ export async function getServerSideProps(context) {
   }
   let product = await Product.findOne({ slug: context.query.slug });
   let variants = await Product.find({ title: product.title })
-  let colorSizeSlug = {} // {red: {xl: {slug: 'wear-the-code', ...}, ...}, ...}
+
+  let colorSizeSlug = {} // {red: {xl: {slug: 'wear-the-code'}, ...}, ...}
   for (let item of variants) {
     if (Object.keys(colorSizeSlug).includes(item.color)) {
       colorSizeSlug[item.color][item.size] = { slug: item.slug };
@@ -153,3 +163,5 @@ export async function getServerSideProps(context) {
 }
 
 export default Slug
+
+// 1 title ki multiple tshirts hai jiska color aur size vary kar rha hai aur vahi ham display karva rahe hai change karvake slug.js mein
