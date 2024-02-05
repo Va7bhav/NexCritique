@@ -8,7 +8,7 @@ import { FaRegWindowClose, FaPlus, FaMinus } from "react-icons/fa";
 import { IoBagAdd } from "react-icons/io5";
 
 const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
-  console.log(cart);
+
   const toggleCart = () => {
     if (ref.current.classList.contains('translate-x-full')) {
       ref.current.classList.remove('translate-x-full');
@@ -38,13 +38,13 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
         {<AiOutlineShoppingCart onClick={toggleCart} className='text-xl md:text-2xl' />}
       </div>
 
-      <div ref={ref} className={`w-72 h-[100vh] sideCart absolute top-0 right-0 bg-pink-100 px-8 py-10 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div ref={ref} className={`w-72 h-[100vh] sideCart overflow-y-scroll absolute top-0 right-0 bg-pink-100 px-8 py-10 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
         <h2 className='font-bold text-xl text-center'>Shopping Cart</h2>
         <span onClick={toggleCart} className="absolute top-2 right-2 cursor-pointer text-xl text-pink-500"><FaRegWindowClose /></span>
         <ol className='list-decimal font-semibold'>
           {Object.keys(cart).length == 0 && <div className='text-center mt-2 mb-2'>Your Cart is Empty</div>}
           {Object.keys(cart).map((k) => {
-            console.log(k);
+            
             return (
               <li key={k}>
                 <div className="item flex my-5">

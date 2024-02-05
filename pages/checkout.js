@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { IoBagAdd } from "react-icons/io5";
@@ -68,7 +69,7 @@ const Checkout = ({ cart, subTotal, addToCart, removeFromCart }) => {
             return (
               <li key={k}>
                 <div className="item flex my-5">
-                  <div className='font-semibold'>{cart[k].name}</div>
+                  <div className='font-semibold'>{cart[k].name} ({cart[k].variant} / {cart[k].size})</div>
                   <div className='flex font-semibold items-center justify-center w-1/3 text-sm'>
                     <FaMinus onClick={() => removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant)} className='cursor-pointer text-pink-500' /> <span className='mx-2 text-xl'> {cart[k].qty} </span> <FaPlus onClick={() => addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant)} className='cursor-pointer text-pink-500' />
                   </div>
