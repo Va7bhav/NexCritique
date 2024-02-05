@@ -39,7 +39,7 @@ const Tshirts = ({ tshirts }) => {
                         {tshirts[tshirt].color.map((c) => {
                         console.log(c)
                           return (
-                            <button key={c} className={`border-2 border-gray-300 bg-${c}-500 rounded-full w-6 h-6 focus:outline-none mx-1`}/>
+                            <button key={c} className={`bg-${c}-500 border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none mx-1`}/>
                           )
                         })}
                         {console.log(" :  :  : ")}
@@ -63,7 +63,7 @@ export async function getServerSideProps(context) {
     await mongoose.connect(process.env.MONGO_URI);
   }
   let products = await Product.find({ category: 'tshirt' });
-  let tshirts = {};
+  let tshirts = {}; // thirts: {'tshirt.title': {...property of that tshirt model}}
   for (let product of products) {
     if (product.title in tshirts) {
       if (!tshirts[product.title].color.includes(product.color) && product.availableQty > 0) {
