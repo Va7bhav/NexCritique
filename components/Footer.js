@@ -13,11 +13,28 @@ const Footer = () => {
               </svg>
             </a>
               <Link href={'/'}>NexCritique</Link>
-            <p className="mt-2 text-sm text-gray-500">Air plant banjo lyft occupy retro adaptogen indego</p>
+            <p className="mt-2 text-sm text-gray-500">Shop at the best Ecommerce website across the world</p>
           </div>
           <div className="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first">
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">SHOP</h2>
+              <nav className="list-none mb-10">
+                <li>
+                  <Link href={'/tshirts'}className="text-gray-600 hover:text-gray-800">T-shirts</Link>
+                </li>
+                <li>
+                <Link href={'/hoodies'}className="text-gray-600 hover:text-gray-800">Hoodies</Link>
+                </li>
+                <li>
+                <Link href={'/stickers'}className="text-gray-600 hover:text-gray-800">Stickers</Link>
+                </li>
+                <li>
+                <Link href={'/mugs'}className="text-gray-600 hover:text-gray-800">Mugs</Link>
+                </li>
+              </nav>
+            </div>
+            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">POLICY</h2>
               <nav className="list-none mb-10">
                 <li>
                   <a className="text-gray-600 hover:text-gray-800">First Link</a>
@@ -34,7 +51,7 @@ const Footer = () => {
               </nav>
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">ABOUT</h2>
               <nav className="list-none mb-10">
                 <li>
                   <a className="text-gray-600 hover:text-gray-800">First Link</a>
@@ -50,46 +67,12 @@ const Footer = () => {
                 </li>
               </nav>
             </div>
-            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-              <nav className="list-none mb-10">
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">First Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-                </li>
-              </nav>
-            </div>
-            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-              <nav className="list-none mb-10">
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">First Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-                </li>
-              </nav>
-            </div>
+            
           </div>
         </div>
         <div className="bg-gray-100">
           <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-            <p className="text-gray-500 text-sm text-center sm:text-left">© 2020 NexCritique —
-              <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">@knyttneve</a>
+            <p className="text-gray-500 text-sm text-center sm:text-left">© 2024 NexCritique — All Right Reserved
             </p>
             <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
               <a className="text-gray-500">

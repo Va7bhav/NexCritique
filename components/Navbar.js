@@ -8,6 +8,7 @@ import { FaRegWindowClose, FaPlus, FaMinus } from "react-icons/fa";
 import { IoBagAdd } from "react-icons/io5";
 
 const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+  console.log(cart);
   const toggleCart = () => {
     if (ref.current.classList.contains('translate-x-full')) {
       ref.current.classList.remove('translate-x-full');
@@ -19,17 +20,17 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
   }
   const ref = useRef();
   return (
-    <div className='flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky top-0 bg-white z-10'>
+    <div className='flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-xl sticky top-0 bg-white z-10'>
       <div className="logo mx-5">
         <Link href={'/'}><Image className='rounded-full' width={90} height={10} src="/logo.jpg" alt='logo'></Image></Link>
       </div>
 
       <div className="nav">
         <ul className='flex items-center space-x-6 font-extrabold md:text-md'>
-          <Link href={'/tshirts'}><li>Tshirts</li></Link>
-          <Link href={'/hoodies'}><li>Hoodies</li> </Link>
-          <Link href={'/stickers'}><li>Stickers</li> </Link>
-          <Link href={'/mugs'}><li>Mugs</li> </Link>
+          <Link href={'/tshirts'}><li className='hover:text-pink-500'>Tshirts</li></Link>
+          <Link href={'/hoodies'}><li className='hover:text-pink-500'>Hoodies</li> </Link>
+          <Link href={'/stickers'}><li className='hover:text-pink-500'>Stickers</li> </Link>
+          <Link href={'/mugs'}><li className='hover:text-pink-500'>Mugs</li> </Link>
         </ul>
       </div>
       <div className="cursor-pointer cart absolute right-0 top-4 mx-5 flex">
@@ -47,7 +48,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
             return (
               <li key={k}>
                 <div className="item flex my-5">
-                  <div className='w-2/3 font-semibold'>{cart[k].name}</div>
+                  <div className='w-2/3 font-semibold'>{cart[k].name} ({cart[k].variant} / {cart[k].size}) </div>
                   <div className='flex font-semibold items-center justify-center w-1/3 text-sm'>
                     <FaMinus onClick={() => removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant)} className='cursor-pointer text-pink-500' /> <span className='mx-2 text-xl'> {cart[k].qty} </span> <FaPlus onClick={() => addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant)} className='cursor-pointer text-pink-500' />
                   </div>
