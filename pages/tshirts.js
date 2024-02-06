@@ -24,7 +24,7 @@ const Tshirts = ({ tshirts }) => {
                     </Link>
                     <div className="mt-4 text-center md:text-left">
                       <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">T-Shirts</h3>
-                      <Link href={'product/wear-the-code'}><h2 className="text-gray-900 title-font text-lg font-medium">{tshirts[tshirt].title}</h2></Link>
+                      <Link href={`product/${tshirts[tshirt].slug}`}><h2 className="text-gray-900 title-font text-lg font-medium">{tshirts[tshirt].title}</h2></Link>
                       <p className="mt-1">{tshirts[tshirt].price}</p>
                       <div className="flex justify-center md:justify-start my-2">
                         {tshirts[tshirt].size.map((s) => {

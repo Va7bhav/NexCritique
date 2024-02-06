@@ -10,7 +10,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const Slug = ({ buyNow, addToCart, product, variants }) => {
-  console.log(typeof (buyNow))
   const router = useRouter()
   const { slug } = router.query;
   const [pin, setPin] = useState();
@@ -44,7 +43,6 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
       });
       setService(false)
     }
-    console.log(service);
   }
   const onChangePin = (e) => {
     setPin(e.target.value);
@@ -117,6 +115,7 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
               </span>
             </div> */}
             <p className="leading-relaxed">{product.desc}</p>
+            <p className="font-bold leading-relaxed">Available quantity: {product.availableQty}</p>
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
               <div className="flex">
                 <span className="mr-3">Color</span>

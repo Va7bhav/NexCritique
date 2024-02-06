@@ -38,7 +38,6 @@ const Signup = () => {
       body: JSON.stringify(data),
     });
     let response = await res.json();
-    console.log(response);
     toast.success('Thank you for Signing up!', {
       position: "top-left",
       autoClose: 1000,

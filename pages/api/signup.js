@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 
 import connectDb from "@/middleware/mongoose";
@@ -6,9 +7,8 @@ import CryptoJS from "crypto-js";
 
 const handler = async (req, res) => {
     if (req.method == 'POST') {
-        console.log(req.body);
         const { name, email, password } = req.body;
-        let u = new User({ name, email, password: CryptoJS.AES.encrypt(password, 'secret').toString() });
+        let u = new User({ name, email, password: CryptoJS.AES.encrypt(password, process.env.AES_SECRET).toString() });
         await u.save()
         res.status(200).json({ success: 'success' });
     } else {
