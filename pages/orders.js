@@ -114,15 +114,15 @@ const Orders = () => {
   )
 }
 
-export async function getServerSideProps(context) {
-  if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URI);
-  }
-  let orders = await Product.find({  });
+// export async function getServerSideProps(context) {
+//   if (!mongoose.connections[0].readyState) {
+//     await mongoose.connect(process.env.MONGO_URI);
+//   }
+//   let orders = await Product.find({  });
   
-  return {
-    props: { orders: orders }
-  }
-}
+//   return {
+//     props: { orders: orders }
+//   }
+// }
 
 export default Orders

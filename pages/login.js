@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import Link from 'next/link'
 import { useRouter } from 'next/router';
@@ -8,8 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
   const router = useRouter();
   const [name, setName] = useState();
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -24,7 +25,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { email, password };
-    const res = await fetch('http://localhost:3000/api/login', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
       method: "POST",
       // mode: "cors", 
       // cache: "no-cache", 
@@ -51,7 +52,7 @@ const Login = () => {
         theme: "light",
       });
       setTimeout(() => {
-        router.push('/')
+        router.push(`${process.env.NEXT_PUBLIC_HOST}`)
       }, 1000);
 
     } else {

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import Link from 'next/link'
 import { useRouter } from 'next/router';
@@ -12,9 +13,9 @@ const Signup = () => {
       router.push('/')
     }
   }, [])
-  const [name, setName] = useState();
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleChange = (e) => {
     if (e.target.name == 'name') { setName(e.target.value) }
@@ -24,7 +25,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { name, email, password };
-    const res = await fetch('http://localhost:3000/api/signup', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signup`, {
       method: "POST",
       // mode: "cors", 
       // cache: "no-cache", 
