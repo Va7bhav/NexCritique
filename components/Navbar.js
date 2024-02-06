@@ -20,7 +20,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
   }
   const ref = useRef();
   return (
-    <div className='flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-xl sticky top-0 bg-white z-10'>
+    <div className='flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-xl sticky top-0 bg-white z-10 bg-opacity-20 backdrop-blur-sm'>
       <div className="logo mx-5">
         <Link href={'/'}><Image className='rounded-full' width={90} height={10} src="/logo.jpg" alt='logo'></Image></Link>
       </div>
@@ -38,7 +38,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
         {<AiOutlineShoppingCart onClick={toggleCart} className='text-xl md:text-2xl' />}
       </div>
 
-      <div ref={ref} className={`w-72 h-[100vh] sideCart overflow-y-scroll absolute top-0 right-0 bg-pink-100 px-8 py-10 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div ref={ref} className={`w-72 h-[100vh] sideCart overflow-y-scroll absolute top-0 right-0 bg-gray-100 px-8 py-10 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'} bg-opacity-80 backdrop-blur-sm`}>
         <h2 className='font-bold text-xl text-center'>Shopping Cart</h2>
         <span onClick={toggleCart} className="absolute top-2 right-2 cursor-pointer text-xl text-pink-500"><FaRegWindowClose /></span>
         <ol className='list-decimal font-semibold'>
