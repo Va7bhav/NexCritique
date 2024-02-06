@@ -49,6 +49,12 @@ export default function App({ Component, pageProps }) {
     }
   }, [router.query])
 
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser({ value: null })
+    setKey(Math.random())
+    router.push('/')
+  }
   const saveCart = (cart) => {
     localStorage.setItem("cart", JSON.stringify(cart));
 
@@ -59,11 +65,7 @@ export default function App({ Component, pageProps }) {
     }
     setSubTotal(subt);
   }
-  const logout = () => {
-    localStorage.removeItem('token');
-    setUser({ value: null })
-    setKey(Math.random())
-  }
+  
   const addToCart = (itemCode, qty, price, name, size, variant) => {
     let newCart = cart;
     if (itemCode in cart) {
