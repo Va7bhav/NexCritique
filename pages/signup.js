@@ -33,7 +33,7 @@ const Signup = () => {
     console.log(response);
     toast.success('Thank you for Signing up!', {
       position: "top-left",
-      autoClose: 5000,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
