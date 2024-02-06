@@ -1,13 +1,15 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { MdAccountCircle } from "react-icons/md";
 import { FaRegWindowClose, FaPlus, FaMinus } from "react-icons/fa";
 import { IoBagAdd } from "react-icons/io5";
 
-const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+  const [dropDown, setDropDown] = useState(false)
 
   const toggleCart = () => {
     if (ref.current.classList.contains('translate-x-full')) {
@@ -18,6 +20,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
       ref.current.classList.remove('translate-x-0');
     }
   }
+
   const ref = useRef();
   return (
     <div className='flex flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-xl sticky top-0 bg-white z-10 bg-opacity-20 backdrop-blur-sm'>
@@ -33,8 +36,21 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
           <Link href={'/mugs'}><li className='hover:text-pink-500'>Mugs</li> </Link>
         </ul>
       </div>
-      <div className="cursor-pointer cart absolute right-0 top-4 mx-5 flex">
-        <Link href={'/login'}><MdAccountCircle  className='text-xl md:text-2xl mx-2' /></Link>
+      <div className="cursor-pointer items-center cart absolute right-0 top-4 mx-5 flex">
+        <div onMouseOver={() => { setDropDown(true) }} onMouseLeave={() => { setDropDown(false) }}>
+          {dropDown && <div onMouseOver={() => { setDropDown(true) }} onMouseLeave={() => { setDropDown(false) }}
+            className="absolute right-5 bg-pink-300 top-6 py-4 rounded-md px-5 w-32 bg-opacity-80 backdrop-blur-sm">
+            <ul>
+              <Link href={'/myaccount'}><li className='py-1 hover:text-pink-700 text-sm font-bold'>My Account</li></Link>
+              <Link href={'/orders'}><li className='py-1 hover:text-pink-700 text-sm font-bold'>Orders</li></Link>
+              <li onClick={logout} className='py-1 hover:text-pink-700 text-sm font-bold'>Logout</li>
+            </ul>
+          </div>}
+          {user.value && <MdAccountCircle className='text-xl md:text-2xl mx-2' />}
+        </div>
+        {!user.value && <Link href={'/login'}><button className='bg-pink-600 px-2 py-1 rounded-md text-sm text-white mx-2'>Login</button></Link>}
+
+
         {<AiOutlineShoppingCart onClick={toggleCart} className='text-xl md:text-2xl' />}
       </div>
 
@@ -44,7 +60,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
         <ol className='list-decimal font-semibold'>
           {Object.keys(cart).length == 0 && <div className='text-center mt-2 mb-2'>Your Cart is Empty</div>}
           {Object.keys(cart).map((k) => {
-            
+
             return (
               <li key={k}>
                 <div className="item flex my-5">
