@@ -3,26 +3,27 @@
 import connectDb from "@/middleware/mongoose";
 import User from "@/models/User";
 import CryptoJS from "crypto-js";
+import jwt from 'jsonwebtoken';
 
 const handler = async (req, res) => {
-    
+
     if (req.method == 'POST') {
         console.log(req.body);
         let user = await User.findOne({ email: req.body.email });
 
-        const bytes = CryptoJS.AES.decrypt(user.password, 'secret');
-        let decryptedPass = bytes.toString(CryptoJS.enc.Utf8)
-        console.log(req.body.email, decryptedPass);
         if (user) {
+            const bytes = CryptoJS.AES.decrypt(user.password, 'secret');
+            let decryptedPass = bytes.toString(CryptoJS.enc.Utf8)
             if (req.body.password === decryptedPass) {
-                res.status(200).json({ success: true, name: user.name, email: user.email })
+                const token = jwt.sign({ name: user.name, email: user.email }, 'JWT_SECRET', {expiresIn: '2d'});
+                res.status(200).json({ success: true, token })
             } else {
-                res.status(400).json({ success: false, error: 'Invalid Credentials'});
+                res.status(400).json({ success: false, error: 'Invalid Credentials' });
             }
         } else {
-            res.status(400).json({ success: false, error: 'Invalid Credentials'});
+            res.status(400).json({ success: false, error: 'Invalid Credentials' });
         }
-        
+
     } else {
         res.status(400).json({ success: false, error: "Please Use Post Method" })
     }
