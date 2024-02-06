@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import LoadingBar from 'react-top-loading-bar'
 
 // const cart = {
 //   "wear-this-code": {
@@ -20,11 +21,18 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [cart, setCart] = useState({})
   const [subTotal, setSubTotal] = useState(0)
-  const [user, setUser] = useState({value: null}); // value: token
+  const [user, setUser] = useState({ value: null }); // value: token
   const [key, setKey] = useState(0);
-
+  const [progress, setProgress] = useState(0)
+  
 
   useEffect(() => {
+    router.events.on('routeChangeStart', () => {
+      setProgress(40);
+    })
+    router.events.on('routeChangeComplete', () => {
+      setProgress(100);
+    })
     try {
       if (localStorage.getItem("cart")) {
         setCart(JSON.parse(localStorage.getItem("cart")))
@@ -36,7 +44,7 @@ export default function App({ Component, pageProps }) {
     }
     const token = localStorage.getItem('token');
     if (token) {
-      setUser({value: token})
+      setUser({ value: token })
       setKey(Math.random())
     }
   }, [router.query])
@@ -53,7 +61,7 @@ export default function App({ Component, pageProps }) {
   }
   const logout = () => {
     localStorage.removeItem('token');
-    setUser({value: null})
+    setUser({ value: null })
     setKey(Math.random())
   }
   const addToCart = (itemCode, qty, price, name, size, variant) => {
@@ -67,7 +75,7 @@ export default function App({ Component, pageProps }) {
     saveCart(newCart)
   }
   const buyNow = (itemCode, qty, price, name, size, variant) => {
-    let newCart = {itemCode: {qty: 1, price, size, name, variant}};
+    let newCart = { itemCode: { qty: 1, price, size, name, variant } };
 
     setCart(newCart);
     saveCart(newCart);
@@ -89,6 +97,7 @@ export default function App({ Component, pageProps }) {
     saveCart(newCart)
   }
   return <>
+    <LoadingBar color='#ff2d55' progress={progress} waitingTime={400} onLoaderFinished={() => setProgress(0)}/>
     <Navbar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
     <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
     <Footer />
