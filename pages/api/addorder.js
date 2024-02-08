@@ -11,6 +11,7 @@ const handler = async (req, res) => {
     if (req.method == 'POST') {
         const { email, orderId, cart, address, amount } = req.body;
         
+        // tempering check 
         let sumTotal = 0;
         for (let item in cart) {
             sumTotal += cart[item].price * cart[item].qty;
