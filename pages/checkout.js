@@ -6,6 +6,8 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { IoBagAdd } from "react-icons/io5";
 import Link from 'next/link'
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
   const router = useRouter();
@@ -22,10 +24,9 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
   const [city, setCity] = useState('')
   const [state, setState] = useState('')
   const [disabled, setDisabled] = useState(true)
-  const [transMessage, setTransMessage] = useState('');
 
   const handleChange = async (e) => {
-    
+
     if (e.target.name == 'name') {
       setName(e.target.value);
     }
@@ -60,9 +61,10 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
     }
   }
   const handlePayment = async (e) => {
-
+    let thisCart = localStorage.getItem('cart');
+    thisCart = JSON.parse(thisCart)
     e.preventDefault();
-    const data = { email, orderId: Date.now(), products: cart, address, amount: subTotal };
+    const data = { email, orderId: Date.now(), cart: thisCart, address, amount: subTotal };
     const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/addorder`, {
       method: "POST",
       // mode: "cors", 
@@ -80,13 +82,47 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
 
     if (response.success) {
       clearCart()
-      router.push('/order')
+      setTimeout(() => {
+        router.push('/orders')
+      }, 2000);
+      toast.success(response.message, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
     } else {
-      setTransMessage(response.message);
+      toast.error(response.message, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
   return (
     <div className='container px-20 sm:m-auto'>
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <h1 className='font-bold text-3xl my-8 text-center'>Checkout</h1>
       <h2 className='text-gray-500 text-xl font-bold text-center'> Add Delivery Details </h2>
       <div className="mx-auto flex my-2">
@@ -165,7 +201,6 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
         <Link href={'/checkout'}>
           <button onClick={handlePayment} disabled={disabled} className="disabled:bg-pink-300 flex items-center mr-2 text-white bg-pink-500 border-0 py-2 px-2 focus:outline-none hover:bg-pink-600 rounded text-sm"><IoBagAdd className='mt-1' />Pay ₹{subTotal}</button>
         </Link>
-        <h1 className='text-pink-700 text-xl text-center font-bold'>{transMessage}</h1>
       </div>}
 
     </div>
