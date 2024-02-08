@@ -17,10 +17,10 @@ const Slug = ({ buyNow, addToCart, product, variants }) => {
 
   const checkService = async () => {
     
-    let pins = await fetch(`${process.env.HOST}/api/pincode`);
+    let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
     let pinJson = await pins.json();
 
-    if (pinJson.includes(parseInt(pin))) {
+    if (Object.keys(pinJson).includes(pin)) {
       toast.success('Pincode Servicable', {
         position: "bottom-center",
         autoClose: 1000,

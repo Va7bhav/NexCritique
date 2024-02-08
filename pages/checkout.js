@@ -24,7 +24,8 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
   const [disabled, setDisabled] = useState(true)
   const [transMessage, setTransMessage] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
+    
     if (e.target.name == 'name') {
       setName(e.target.value);
     }
@@ -39,6 +40,20 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
     }
     else if (e.target.name == 'pincode') {
       setPincode(e.target.value);
+      if (e.target.value.length == 6) {
+        let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
+        let pinJson = await pins.json();
+        if (Object.keys(pinJson).includes(e.target.value)) {
+          setCity(pinJson[e.target.value][0]);
+          setState(pinJson[e.target.value][1]);
+        } else {
+          setState('')
+          setCity('')
+        }
+      } else {
+        setState('')
+        setCity('')
+      }
     }
     if (name && email && phone && address && pincode) {
       setDisabled(false)

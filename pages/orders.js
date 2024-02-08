@@ -1,128 +1,87 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable react/no-unescaped-entities */
-import Product from '@/models/Product';
-import mongoose from 'mongoose';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Orders = () => {
+  const [orders, setOrders] = useState({})
   const router = useRouter();
-	
-	useEffect(() => {
-		if (!localStorage.getItem('token')) {
-			router.push('/')
-		}
-	}, [])
+  const fetchOrders = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/myorders`, {
+      method: "POST",
+      // mode: "cors", 
+      // cache: "no-cache", 
+      // credentials: "same-origin", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // redirect: "follow",
+      // referrerPolicy: "no-referrer",
+      body: JSON.stringify({ token: localStorage.getItem('token') }),
+    });
+    let response = await res.json();
+    setOrders(response.orders)
+    console.log(orders);
+  }
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      router.push('/')
+    } else {
+      fetchOrders();
+    }
+  }, [])
   return (
 
-    <>
+    <div className='min-h-screen'>
       <h2 className="text-3xl font-extrabold dark:text-gray-700 text-center my-2 underline">My Orders</h2>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-5/6 m-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <table className="my-10 w-5/6 m-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">
-                Product name
+                Order Id
               </th>
               <th scope="col" className="px-6 py-3">
-                Color
+                Amount
               </th>
               <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">
-                Category
+                Address
               </th>
               <th scope="col" className="px-6 py-3">
-                Price
+                info
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-gray-200 dark:border-gray-700 hover:opacity-90">
-              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                Apple MacBook Pro 17"
-              </th>
-              <td className="px-6 py-4">
-                Silver
-              </td>
-              <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                Laptop
-              </td>
-              <td className="px-6 py-4">
-                $2999
-              </td>
-            </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-700 hover:opacity-90">
-              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                Microsoft Surface Pro
-              </th>
-              <td className="px-6 py-4">
-                White
-              </td>
-              <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                Laptop PC
-              </td>
-              <td className="px-6 py-4">
-                $1999
-              </td>
-            </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-700 hover:opacity-90">
-              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                Magic Mouse 2
-              </th>
-              <td className="px-6 py-4">
-                Black
-              </td>
-              <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                Accessories
-              </td>
-              <td className="px-6 py-4">
-                $99
-              </td>
-            </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-700 hover:opacity-90">
-              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                Google Pixel Phone
-              </th>
-              <td className="px-6 py-4">
-                Gray
-              </td>
-              <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                Phone
-              </td>
-              <td className="px-6 py-4">
-                $799
-              </td>
-            </tr>
-            <tr>
-              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                Apple Watch 5
-              </th>
-              <td className="px-6 py-4">
-                Red
-              </td>
-              <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                Wearables
-              </td>
-              <td className="px-6 py-4">
-                $999
-              </td>
-            </tr>
+            {Object.keys(orders).map((key) => {
+              return (
+                <>
+                  <tr className='hover:opacity-90'>
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                      {orders[key].orderId}
+                    </th>
+                    <td className="px-6 py-4">
+                      {orders[key].amount}
+                    </td>
+                    <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                      {orders[key].address}
+                    </td>
+                    <td className="px-6 py-4">
+                      <Link className={'text-blue-500'} href={`/order?id=${orders[key]._id}`}><button type="button" className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Check</button></Link>
+                    </td>
+                  </tr>
+                </>
+              )
+            })}
+
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   )
 }
-
-// export async function getServerSideProps(context) {
-//   if (!mongoose.connections[0].readyState) {
-//     await mongoose.connect(process.env.MONGO_URI);
-//   }
-//   let orders = await Product.find({  });
-  
-//   return {
-//     props: { orders: orders }
-//   }
-// }
 
 export default Orders
