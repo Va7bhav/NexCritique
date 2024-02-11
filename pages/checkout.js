@@ -9,21 +9,28 @@ import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
   const router = useRouter();
-  useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      router.push('/')
-    }
-  }, [])
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState()
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
   const [pincode, setPincode] = useState('')
   const [city, setCity] = useState('')
   const [state, setState] = useState('')
   const [disabled, setDisabled] = useState(true)
+
+  useEffect(() => {
+    if (!localStorage.getItem('myuser')) {
+      router.push('/')
+    } else {
+      const user = JSON.parse(localStorage.getItem('myuser'));
+      setEmail(user.email)
+    }
+    
+  }, [])
+  
 
   const handleChange = async (e) => {
 
@@ -65,6 +72,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
     thisCart = JSON.parse(thisCart)
     e.preventDefault();
     const data = { email, orderId: Date.now(), cart: thisCart, address, amount: subTotal };
+    
     const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/addorder`, {
       method: "POST",
       // mode: "cors", 
@@ -107,6 +115,10 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
         progress: undefined,
         theme: "light",
       });
+      if (response.tempered) {
+        clearCart();
+        localStorage.removeItem('cart');
+      }
     }
   }
   return (
@@ -135,7 +147,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
         <div className="px-2 w-1/2">
           <div className="mb-4">
             <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
-            <input onChange={handleChange} value={email} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+            <input value={email} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-pink-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly/>
           </div>
         </div>
       </div>

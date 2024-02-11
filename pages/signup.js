@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Signup = () => {
   const router = useRouter();
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('myuser')) {
       router.push('/')
     }
   }, [])
@@ -48,6 +48,7 @@ const Signup = () => {
       progress: undefined,
       theme: "light",
       });
+    router.push('/login');
   }
   return (
     <div>

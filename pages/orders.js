@@ -19,7 +19,7 @@ const Orders = () => {
       },
       // redirect: "follow",
       // referrerPolicy: "no-referrer",
-      body: JSON.stringify({ token: localStorage.getItem('token') }),
+      body: JSON.stringify({ token: JSON.parse(localStorage.getItem('myuser')).token }),
     });
     let response = await res.json();
     setOrders(response.orders)
@@ -27,7 +27,7 @@ const Orders = () => {
   }
 
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('myuser')) {
       router.push('/')
     } else {
       fetchOrders();
@@ -58,8 +58,7 @@ const Orders = () => {
           <tbody>
             {Object.keys(orders).map((key) => {
               return (
-                <>
-                  <tr className='hover:opacity-90'>
+                  <tr key={key} className='hover:opacity-90'>
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
                       {orders[key].orderId}
                     </th>
@@ -73,7 +72,6 @@ const Orders = () => {
                       <Link className={'text-blue-500'} href={`/order?id=${orders[key]._id}`}><button type="button" className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Check</button></Link>
                     </td>
                   </tr>
-                </>
               )
             })}
 
