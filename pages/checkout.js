@@ -63,7 +63,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
         setCity('')
       }
     }
-    if (name && email && phone && address && pincode) {
+    if (address.length) {
       setDisabled(false)
     }
   }
@@ -71,9 +71,9 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
     let thisCart = localStorage.getItem('cart');
     thisCart = JSON.parse(thisCart)
     e.preventDefault();
-    const data = { email, orderId: Date.now(), cart: thisCart, address, amount: subTotal };
+    const data = { email, orderId: Date.now(), cart: thisCart, address, amount: subTotal, phone, pincode };
     
-    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/addorder`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/transact`, {
       method: "POST",
       // mode: "cors", 
       // cache: "no-cache", 
@@ -182,7 +182,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
         </div>
         <div className="px-2 w-1/2">
           <div className="mb-4">
-            <label htmlFor="city" className="leading-7 text-sm text-gray-600">City</label>
+            <label htmlFor="city" className="leading-7 text-sm text-gray-600">District</label>
             <input value={city} type="text" id="city" name="city" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly={true} />
           </div>
         </div>

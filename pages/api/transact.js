@@ -33,12 +33,22 @@ const handler = async (req, res) => {
             res.status(400).json({ success: false, message: "Items prices were tempered with", tempered: true })
             return;
         }
-
+        
+        // Check if the details are valid
+        if (req.body.phone.length !== 10 || !Number.isInteger(req.body.phone)) {
+            res.status(200).json({success: false, message: "Please Enter a 10-Digit Mobile Number"})
+            return;
+        }
+        if (req.body.pincode.length !== 10 || !Number.isInteger(req.body.pincode)) {
+            res.status(200).json({success: false, message: "Please Enter a valid pincode of length 6-digit"})
+            return;
+        }
 
         // begin the transaction
         let user = await User.findOne({ email });
         if (!user) {
             res.status(400).json({ success: false, message: 'Please use the Email Id registered for the application' })
+            return;
         } else {
             // we got the user
             if (user.wallet >= amount) {
@@ -60,6 +70,7 @@ const handler = async (req, res) => {
                 }
             } else {
                 res.status(400).json({ success: false, message: 'Please ensure your wallet has sufficient credentials' });
+                return;
             }
         }
     } else {
