@@ -20,18 +20,56 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
   const [city, setCity] = useState('')
   const [state, setState] = useState('')
   const [disabled, setDisabled] = useState(true)
-
+  const [user, setUser] = useState({ value: null });
   useEffect(() => {
     if (!localStorage.getItem('myuser')) {
       router.push('/')
     } else {
-      const user = JSON.parse(localStorage.getItem('myuser'));
-      setEmail(user.email)
+      const myuser = JSON.parse(localStorage.getItem('myuser'));
+      setUser(myuser);
+      setEmail(myuser.email);
+      fetchData(myuser.token)
     }
-    
   }, [])
-  
+  useEffect(() => {
+    if (phone.length >= 10 && pincode.length >= 6 && address.length > 5) {
+      setDisabled(false);
+    }
+  }, [phone, pincode, address])
 
+  const fetchData = async (token) => {
+    const data = { token: token };
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let response = await res.json()
+    console.log(response);
+    setName(response.name)
+    setAddress(response.address)
+    setPincode(response.pincode)
+    setPhone(response.phone)
+    getPinCode(response.pincode)
+  }
+
+  const getPinCode = async (pin) => {
+    let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
+    let pinJson = await pins.json();
+    
+    
+    console.log(Object.keys(pinJson).includes(pin));
+    console.log("heelo")
+    if (Object.keys(pinJson).includes(pin)) {
+      setCity(pinJson[pin][0]);
+      setState(pinJson[pin][1]);
+    } else {
+      setState('')
+      setCity('')
+    }
+  }
   const handleChange = async (e) => {
 
     if (e.target.name == 'name') {
@@ -49,18 +87,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
     else if (e.target.name == 'pincode') {
       setPincode(e.target.value);
       if (e.target.value.length == 6) {
-        let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
-        let pinJson = await pins.json();
-        if (Object.keys(pinJson).includes(e.target.value)) {
-          setCity(pinJson[e.target.value][0]);
-          setState(pinJson[e.target.value][1]);
-        } else {
-          setState('')
-          setCity('')
-        }
-      } else {
-        setState('')
-        setCity('')
+        getPinCode(e.target.value);
       }
     }
     if (address.length) {
@@ -71,8 +98,8 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
     let thisCart = localStorage.getItem('cart');
     thisCart = JSON.parse(thisCart)
     e.preventDefault();
-    const data = { email, orderId: Date.now(), cart: thisCart, address, amount: subTotal, phone, pincode };
-    
+    const data = { name, email, orderId: Date.now(), cart: thisCart, address, city, state, amount: subTotal, phone, pincode };
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/transact`, {
       method: "POST",
       // mode: "cors", 
@@ -147,7 +174,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
         <div className="px-2 w-1/2">
           <div className="mb-4">
             <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
-            <input value={email} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-pink-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly/>
+            <input value={email} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-pink-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" readOnly />
           </div>
         </div>
       </div>

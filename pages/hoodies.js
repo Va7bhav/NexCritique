@@ -7,6 +7,7 @@ import Link from 'next/link'
 import React from 'react'
 
 const Hoodies = ({ products }) => {
+  
   return (
     <div>
       <section className="text-gray-600 body-font">
@@ -15,7 +16,7 @@ const Hoodies = ({ products }) => {
             {Object.keys(products).length === 0 && <p> Sorry! All the Hoodies are currently out of Stock, stock will be refilled in coming days!</p>}
             {
               Object.keys(products).map((hoodie) => {
-
+              
                 return (
                   <div key={products[hoodie]._id} className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-5">
                     <Link href={`product/${products[hoodie].slug}`}>
@@ -28,6 +29,7 @@ const Hoodies = ({ products }) => {
                       <Link href={`product/${products[hoodie].slug}`}><h2 className="text-gray-900 title-font text-lg font-medium">{products[hoodie].title}</h2></Link>
                       <p className="mt-1">{products[hoodie].price}</p>
                       <div className="flex justify-center md:justify-start my-2">
+                        {console.log("product:", products[hoodie].size)}
                         {products[hoodie].size.map((s) => {
                           return (
                             <div key={s} className='border border-gray-400 px-1 bg-gray-200 mx-1'>
@@ -35,6 +37,8 @@ const Hoodies = ({ products }) => {
                             </div>
                           )
                         })}
+                        
+                              
                       </div>
                       <div className="flex justify-center md:justify-start my-2">
                         {products[hoodie].color.map((c) => {
@@ -74,10 +78,10 @@ export async function getServerSideProps(context) {
 
     } else {
       hoodies[product.title] = JSON.parse(JSON.stringify(product));
-      if (product.availableQty > 0) {
+      // if (product.availableQty > 0) {
         hoodies[product.title].color = [product.color]
         hoodies[product.title].size = [product.size]
-      }
+      // }
     }
   }
   return {

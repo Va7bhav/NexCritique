@@ -5,13 +5,13 @@ import connectDb from "@/middleware/mongoose";
 import Order from "@/models/Order";
 import Product from "@/models/Product";
 import User from "@/models/User";
-
+import pincodes from '@/pincode.json'
 
 const handler = async (req, res) => {
     if (req.method == 'POST') {
-        const { email, orderId, cart, address, amount } = req.body;
+        const { name, email, orderId, cart, address, city, state, amount, phone, pincode } = req.body;
 
-        // tempering check 
+        // Cart tempering check 
         let sumTotal = 0;
         for (let item in cart) {
             sumTotal += cart[item].price * cart[item].qty;
@@ -35,11 +35,16 @@ const handler = async (req, res) => {
         }
         
         // Check if the details are valid
-        if (req.body.phone.length !== 10 || !Number.isInteger(req.body.phone)) {
+        
+        if (phone.length !== 10 || !Number.isInteger(Number(phone))) {
             res.status(200).json({success: false, message: "Please Enter a 10-Digit Mobile Number"})
             return;
         }
-        if (req.body.pincode.length !== 10 || !Number.isInteger(req.body.pincode)) {
+        if (!Object.keys(pincodes).includes(pincode)) {
+            res.status(200).json({success: false, message: "Pincode is not servicable"})
+            return;
+        }
+        if (pincode.length !== 6 || !Number.isInteger(Number(pincode))) {
             res.status(200).json({success: false, message: "Please Enter a valid pincode of length 6-digit"})
             return;
         }
@@ -47,15 +52,15 @@ const handler = async (req, res) => {
         // begin the transaction
         let user = await User.findOne({ email });
         if (!user) {
-            res.status(400).json({ success: false, message: 'Please use the Email Id registered for the application' })
+            res.status(200).json({ success: false, message: 'Please use the Email Id registered for the application' })
             return;
         } else {
             // we got the user
             if (user.wallet >= amount) {
-                let o = new Order({ email, orderId, products: cart, address, amount, status: 'Accepted' });
+                let o = new Order({ email, orderId, products: cart, address, city, state, pincode, amount, status: 'Accepted', phone, name });
                 await o.save();
 
-                res.status(400).json({ success: true, message: 'Your Order has been placed, redirecting to orders page' });
+                res.status(200).json({ success: true, message: 'Your Order has been placed, redirecting to orders page' });
 
                 // post transaction update the user wallet
                 const filter = { email: email };
@@ -69,7 +74,7 @@ const handler = async (req, res) => {
                     await Product.findOneAndUpdate({ slug: slug }, { $inc: { 'availableQty': - products[slug].qty } });
                 }
             } else {
-                res.status(400).json({ success: false, message: 'Please ensure your wallet has sufficient credentials' });
+                res.status(200).json({ success: false, message: 'Please ensure your wallet has sufficient credentials' });
                 return;
             }
         }
