@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
 
 
 const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
@@ -23,7 +24,7 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
   const [user, setUser] = useState({ value: null });
   useEffect(() => {
     if (!localStorage.getItem('myuser')) {
-      router.push('/')
+      router.push('/login')
     } else {
       const myuser = JSON.parse(localStorage.getItem('myuser'));
       setUser(myuser);
@@ -149,7 +150,8 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
     }
   }
   return (
-    <div className='container px-20 sm:m-auto'>
+    
+    <div className='container px-20 sm:m-auto min-h-screen'>
       <ToastContainer
         position="top-left"
         autoClose={5000}
@@ -162,6 +164,9 @@ const Checkout = ({ cart, clearCart, subTotal, addToCart, removeFromCart }) => {
         pauseOnHover
         theme="light"
       />
+      <Head>
+        <title> Checkout - NexCritique </title>
+      </Head>
       <h1 className='font-bold text-3xl my-8 text-center'>Checkout</h1>
       <h2 className='text-gray-500 text-xl font-bold text-center'> Add Delivery Details </h2>
       <div className="mx-auto flex my-2">
