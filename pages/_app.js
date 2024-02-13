@@ -3,9 +3,12 @@
 /* eslint-disable react/prop-types */
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "@/src/theme/theme";
 import "@/styles/globals.css";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import FullLayout from "@/src/layouts/FullLayout";
 import LoadingBar from 'react-top-loading-bar'
 
 // const cart = {
@@ -102,9 +105,11 @@ export default function App({ Component, pageProps }) {
   }
   return <>
     <LoadingBar color='#ff2d55' progress={progress} waitingTime={400} onLoaderFinished={() => setProgress(0)} />
-    {/* https://youtu.be/j2p4OwS5JwU?list=PLu0W_9lII9agtWvR_TZdb_r0dNI8-lDwG&t=673 */}
-    {key && <Navbar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />}
-    <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
-    <Footer />
+    
+        {/* https://youtu.be/j2p4OwS5JwU?list=PLu0W_9lII9agtWvR_TZdb_r0dNI8-lDwG&t=673 */}
+        {key && <Navbar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />}
+        <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
+        <Footer />
+      
   </>
 }
