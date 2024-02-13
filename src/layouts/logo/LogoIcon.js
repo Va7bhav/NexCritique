@@ -5,8 +5,8 @@ import LogoDark from "../../../assets/images/logos/logo-dark.svg";
 
 const LogoIcon = () => {
   return (
-    <Link href="/">
-      <Image src={LogoDark} alt={LogoDark} />
+    <Link href="/admin">
+      <p className="text-pink-500 no-underline text-center font-bold"> NexCritque </p>
     </Link>
   );
 };
