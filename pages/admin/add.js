@@ -7,6 +7,8 @@ import theme from '@/src/theme/theme';
 import { ThemeProvider } from '@emotion/react';
 import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Radio, RadioGroup, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Add = () => {
 	const [form, setForm] = useState({});
@@ -29,8 +31,34 @@ const Add = () => {
 		});
 
 		let response = await res.json()
-		console.log(response.success);
+		if (response.success) {
+			toast.success(response.message, {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+				
+			});
+		} else {
+			toast.error(response.message, {
+				position: "top-left",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			})
+		}
+	}
 
+	const handleImageUpload = () => {
+		
 	}
 	return (
 		<ThemeProvider theme={theme}>
@@ -41,6 +69,20 @@ const Add = () => {
 			}
 			</style>
 			<FullLayout>
+				<ToastContainer
+					position="top-right"
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme="light"
+				/>
+				{/* Same as */}
+				<ToastContainer />
 				<Grid container spacing={0}>
 					<Grid item xs={12} lg={12}>
 						<BaseCard title="Add a Product">
@@ -52,7 +94,9 @@ const Add = () => {
 								<TextField onChange={onChange} value={form.size ? form.size : ""} name="size" label="Size" variant="outlined" />
 								<TextField onChange={onChange} value={form.price ? form.price : ""} name="price" label="Price" variant="outlined" />
 								<TextField onChange={onChange} value={form.qty ? form.qty : ""} name="qty" label="Quantity" variant="outlined" />
-								<TextField onChange={onChange} value={form.img ? form.img : ""} name="img" label="Image Link" variant="outlined" />
+								<TextField onChange={onChange} value={form.img ? form.img : ""} name="img" label="Image" variant="outlined" />
+								<input onClick={handleImageUpload} type="file" />
+
 
 								<TextField
 									onChange={onChange}
@@ -82,3 +126,5 @@ const Add = () => {
 }
 
 export default Add
+
+
