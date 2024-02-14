@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -109,7 +110,11 @@ export default function App({ Component, pageProps }) {
         {/* https://youtu.be/j2p4OwS5JwU?list=PLu0W_9lII9agtWvR_TZdb_r0dNI8-lDwG&t=673 */}
         {key && <Navbar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />}
         <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
+        {/* <style jsx global>{`
+        ${ 'body {background: rgb(39,29,56);}' }
+      `}</style> */}
         <Footer />
+
       
   </>
 }

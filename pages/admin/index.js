@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import BlogCard from "../../src/components/dashboard/BlogCard";
 import SalesOverview from "../../src/components/dashboard/SalesOverview";
 import DailyActivity from "../../src/components/dashboard/DailyActivity";
-import ProductPerfomance from "../../src/components/dashboard/ProductPerfomance";
+import ProductPerfomance from "../../src/components/dashboard/AllProducts";
 import React from "react";
 import { ThemeProvider } from "@emotion/react";
 import FullLayout from "@/src/layouts/FullLayout";

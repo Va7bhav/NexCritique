@@ -70,7 +70,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subT
           {<AiOutlineShoppingCart onClick={toggleCart} className='text-xl md:text-2xl' />}
         </div>
 
-        <div ref={ref} className={`w-72 h-[100vh] sideCart overflow-y-scroll absolute top-0 bg-gray-100 px-8 py-10 transition-all ${sidebar ? 'right-0' : '-right-96'} bg-opacity-80 backdrop-blur-sm`}>
+        <div ref={ref} className={`w-72 h-[100vh] sideCart overflow-y-scroll absolute top-0 bg-gray-100 px-8 py-10 transition-all ${sidebar ? 'right-0' : 'hidden -right-96'} bg-opacity-80 backdrop-blur-sm`}>
           <h2 className='font-bold text-xl text-center'>Shopping Cart</h2>
           <span onClick={toggleCart} className="absolute top-2 right-2 cursor-pointer text-xl text-pink-500"><FaRegWindowClose /></span>
           <ol className='list-decimal font-semibold'>

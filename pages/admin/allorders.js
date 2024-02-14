@@ -1,4 +1,4 @@
-import ProductPerfomance from '@/src/components/dashboard/ProductPerfomance';
+import ProductPerfomance from '@/src/components/dashboard/AllProducts';
 import FullLayout from '@/src/layouts/FullLayout';
 import theme from '@/src/theme/theme';
 import { ThemeProvider } from '@emotion/react';

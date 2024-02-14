@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
     address: { type: String, default: '' },
     pincode: { type: String, default: '' },
     phone: { type: Number, default: '' },
+    admin: { type: Boolean, default: false }
 
 }, { timestamps: true });
 
