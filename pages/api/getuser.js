@@ -8,8 +8,8 @@ const handler = async (req, res) => {
         let token = req.body.token;
         let user = jsonwebtoken.verify(token, process.env.JWT_SECRET)
         let dbUser = await User.findOne({ email: user.email })
-        const { name, email, address, pincode, phone } = dbUser;
-        res.status(200).json({ name, email, address, pincode, phone });
+        const { name, email, address, pincode, phone, isadmin } = dbUser;
+        res.status(200).json({ name, email, address, pincode, phone, isadmin });
     } else {
         res.status(400).json({ error: 'error' });
     }

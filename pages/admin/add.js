@@ -6,11 +6,18 @@ import FullLayout from '@/src/layouts/FullLayout';
 import theme from '@/src/theme/theme';
 import { ThemeProvider } from '@emotion/react';
 import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Radio, RadioGroup, Stack, TextField } from '@mui/material';
-import React, { useState } from 'react'
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
+
+
+
+
 const Add = () => {
+
 	const [form, setForm] = useState({});
 	const onChange = (e) => {
 		setForm({
@@ -41,7 +48,7 @@ const Add = () => {
 				draggable: true,
 				progress: undefined,
 				theme: "light",
-				
+
 			});
 		} else {
 			toast.error(response.message, {
@@ -58,7 +65,7 @@ const Add = () => {
 	}
 
 	const handleImageUpload = () => {
-		
+
 	}
 	return (
 		<ThemeProvider theme={theme}>
@@ -94,7 +101,7 @@ const Add = () => {
 								<TextField onChange={onChange} value={form.size ? form.size : ""} name="size" label="Size" variant="outlined" />
 								<TextField onChange={onChange} value={form.price ? form.price : ""} name="price" label="Price" variant="outlined" />
 								<TextField onChange={onChange} value={form.qty ? form.qty : ""} name="qty" label="Quantity" variant="outlined" />
-								<TextField onChange={onChange} value={form.img ? form.img : ""} name="img" label="Image" variant="outlined" />
+								<TextField onChange={onChange} value={form.img ? form.img : ""} name="img" label="Image-Link" variant="outlined" />
 								<input onClick={handleImageUpload} type="file" />
 
 

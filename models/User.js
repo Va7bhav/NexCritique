@@ -9,8 +9,8 @@ const UserSchema = new mongoose.Schema({
     wallet: { type: Number, default: 0 },
     address: { type: String, default: '' },
     pincode: { type: String, default: '' },
-    phone: { type: Number, default: '' },
-    admin: { type: Boolean, default: false }
+    phone: { type: String, default: '' },
+    isadmin: { type: Boolean, default: false }
 
 }, { timestamps: true });
 

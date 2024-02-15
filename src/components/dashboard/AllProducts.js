@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
@@ -12,10 +13,14 @@ import {
   Chip,
 } from "@mui/material";
 import BaseCard from "../baseCard/BaseCard";
+import mongoose from "mongoose";
+import Product from "@/models/Product";
+import ProfileDD from "@/src/layouts/header/ProfileDD";
 
 
 
 const AllProducts = ({ products }) => {
+
   return (
     <BaseCard title="All Products">
       <Table
@@ -55,7 +60,8 @@ const AllProducts = ({ products }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {products.map((product) => (
+
+          {products.map((product) => (
             <TableRow key={product.slug}>
               <TableCell>
                 <Typography
@@ -115,7 +121,7 @@ const AllProducts = ({ products }) => {
                 <Typography variant="h6">₹{product.price}</Typography>
               </TableCell>
             </TableRow>
-          ))} */}
+          ))}
         </TableBody>
       </Table>
     </BaseCard>
@@ -123,3 +129,17 @@ const AllProducts = ({ products }) => {
 };
 
 export default AllProducts;
+
+export async function getServerSideProps(context) {
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(process.env.MONGO_URI);
+  }
+  let products = await Product.find();
+  console.log(products)
+  return {
+    props: {
+      products: JSON.parse(JSON.stringify(products))
+    }
+  }
+  
+}
