@@ -70,7 +70,7 @@ const AllProducts = ({ products }) => {
                     fontWeight: "500",
                   }}
                 >
-                  {product.slug}
+                  {product.slug} | category: {product.category}
                 </Typography>
               </TableCell>
               <TableCell>
