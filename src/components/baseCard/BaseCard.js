@@ -13,9 +13,9 @@ const BaseCard = (props) => {
   return (
     <Card>
       <Box p={2} display="flex" alignItems="center">
-        <Typography variant="h4">{props.title}</Typography>
+        <Typography variant="h4"></Typography>
       </Box>
-      <CardContent>{props.children}</CardContent>
+      <CardContent></CardContent>
     </Card>
   );
 };
