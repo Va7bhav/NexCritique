@@ -10,8 +10,13 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import multer from 'multer';
+import uploader from '@/utils/cloudinary';
+import {Cloudinary} from "@cloudinary/url-gen";
 
-
+const App = () => {
+  const cld = new Cloudinary({cloud: {cloudName: 'dguargjvz'}});
+};
 
 
 
@@ -63,9 +68,10 @@ const Add = () => {
 			})
 		}
 	}
-
+	const upload = multer({ dest: 'uploads/' })
+	
 	const handleImageUpload = () => {
-
+		
 	}
 	return (
 		<ThemeProvider theme={theme}>
