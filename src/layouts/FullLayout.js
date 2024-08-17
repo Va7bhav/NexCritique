@@ -29,7 +29,7 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
     paddingTop: "64px",
   },
 }));
-
+// eslint-disable-next-line
 const FullLayout = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = React.useState(true);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = React.useState(false);
